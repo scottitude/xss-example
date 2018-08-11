@@ -1,3 +1,11 @@
+#-------------------------------------------------#
+# Title: main.py
+# Dev:   Scott Luse
+# Date:  Aug 11, 2018
+# cross site scripting (xss) example
+# replace works better than strip
+#-------------------------------------------------#
+
 import os
 import base64
 
@@ -31,10 +39,15 @@ def home():
 <div class="message">
 {}
 </div>
-""".format(m.content)
+""".format(m.content.replace('<', '&lt;').replace('>', '&gt;'))
 
     return body 
 
+'''
+<script>
+alert('Hello losers!');
+</script>
+'''
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 6738))
